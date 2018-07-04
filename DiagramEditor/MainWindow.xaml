@@ -5,8 +5,36 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DiagramEditor"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        
-    </Grid>
+        Title="MainWindow" Height="600" Width="1100"
+        MinWidth="1000" MinHeight="500" WindowState="Maximized">
+    <DockPanel>
+        <GroupBox DockPanel.Dock="Left" Header="Управление данными">
+            <DockPanel Width="200">
+                <Label DockPanel.Dock="Top" Content="Легенда" />
+                <TextBox DockPanel.Dock="Top" x:Name="legend" />
+                <Label DockPanel.Dock="Top" Content="Данные" />
+                <TextBox DockPanel.Dock="Top" x:Name="data" />
+                <Button DockPanel.Dock="Top" x:Name="add" Content="Add" Click="add_Click"/>
+                <Button DockPanel.Dock="Bottom" x:Name="draw" Content="Draw" Click="draw_Click"/>
+                <Button DockPanel.Dock="Bottom" x:Name="del" Content="Delete" Click="del_Click"/>
+                <ListBox x:Name="dataList" />
+            </DockPanel>
+        </GroupBox>
+        <GroupBox DockPanel.Dock="Bottom" Header="Управление просмотром">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"
+                        VerticalAlignment="Center">
+                <Button x:Name="reset" Content="Reset" Click="reset_Click" 
+                        Width="200"/>
+                <Button x:Name="save" Content="Save" Click="reset_Click" 
+                        Width="200"/>
+                <Button x:Name="viev" Content="View" Click="reset_Click" 
+                        Width="200"/>
+            </StackPanel>
+        </GroupBox>
+        <GroupBox Header="Просмотр">
+            <Canvas x:Name="viewBox" Background="LightBlue">
+                
+            </Canvas>
+        </GroupBox>
+    </DockPanel>
 </Window>
