@@ -20,9 +20,11 @@ namespace DiagramEditor
     /// </summary>
     public partial class MainWindow : Window
     {
+        Color c1, c2;
+        Random r = new Random();
         List<DataDiagram> lst = new List<DataDiagram>();
-        int start = 600;
-        public double WidthRect{ get; set; }
+        const int interval = 10;
+        public double WidthRect { get; set; }
         public MainWindow()
         {
             InitializeComponent();
@@ -49,21 +51,37 @@ namespace DiagramEditor
             r.RenderTransform = new TranslateTransform(a, b);
             viewBox.Children.Add(r);
         }
-
-        private void draw_Click(object sender, RoutedEventArgs e)
+        private void drawText(string content, double x, double y, int fontsize)
         {
-            WidthRect = (viewBox.ActualWidth / lst.Count) - (10* lst.Count);     
-            double x = 830;
-            double y = 660;
-            //lst.Sort();
+            Label l = new Label();
+            l.FontSize = fontsize;
+            l.Content = content;
+            viewBox.Children.Add(l);
+            l.RenderTransform = new TranslateTransform(x-l.FontSize, y-l.FontSize*2);
+        }
+        private void drawDiagram()
+        {
+            WidthRect = (viewBox.ActualWidth - (interval * lst.Count)) / lst.Count - interval;
+            double x = interval;
+            double y = viewBox.ActualHeight - interval;
             int max = lst.Max(k => k.Procent);
             double height;
             foreach (var item in lst)
             {
-                height = (100 * item.Procent)/max;
-                drawRect(WidthRect, height, Brushes.Orange, Brushes.Blue, 1, x, y- viewBox.ActualHeight);
-                x -= WidthRect+10;
+                c1 = Color.FromRgb((byte)r.Next(255), (byte)r.Next(255), (byte)r.Next(255));
+                c2 = Color.FromRgb((byte)r.Next(255), (byte)r.Next(255), (byte)r.Next(255));
+                height = ((100 * item.Procent) / max) * 5;
+                drawRect(WidthRect, height, new LinearGradientBrush(c1, c2, 1), Brushes.Blue, 2, x, y - height);
+                drawText(item.Name, x+ WidthRect/2, y - height, (int)WidthRect%8);
+                x += WidthRect + interval;
             }
+            
+        }
+
+        private void draw_Click(object sender, RoutedEventArgs e)
+        {
+            viewBox.Children.Clear();
+            drawDiagram();      
         }
 
         private void del_Click(object sender, RoutedEventArgs e)
@@ -72,12 +90,15 @@ namespace DiagramEditor
             if (k < 0)
                 MessageBox.Show("Вы не выбрали элемент для удаления", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Error);
             else
+            {
                 dataList.Items.RemoveAt(k);
+                lst.RemoveAt(k);
+            }
         }
 
         private void reset_Click(object sender, RoutedEventArgs e)
         {
-
+            viewBox.Children.Clear();
         }
     }
 }

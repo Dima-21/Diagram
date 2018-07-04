@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DiagramEditor
 {
-    class DataDiagram : IComparable
+    class DataDiagram
     {
         public String Name { get; set; }
         public int Procent { get; set; }
@@ -16,9 +16,5 @@ namespace DiagramEditor
             Procent = p;
         }
 
-        public int CompareTo(object obj)
-        {
-            return (obj as DataDiagram).Procent - Procent;
-        }
     }
 }
