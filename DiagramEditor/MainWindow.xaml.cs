@@ -15,9 +15,6 @@ using System.Windows.Shapes;
 
 namespace DiagramEditor
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         Color c1, c2;
