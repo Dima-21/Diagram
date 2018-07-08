@@ -72,16 +72,27 @@ namespace DiagramEditor
                 c2 = Color.FromRgb((byte)r.Next(255), (byte)r.Next(255), (byte)r.Next(255));
                 height = ((100 * item.Procent) / max) * 5;
                 drawRect(WidthRect, height, new LinearGradientBrush(c1, c2, 1), Brushes.Blue, 2, x, y - height);
-                drawText(item.Name, x+ WidthRect/2, y - height, (int)WidthRect%8);
+                drawText(item.Name, x+ WidthRect/2, y - height, (int)WidthRect/8);
                 x += WidthRect + interval;
-            }
-            
+            }  
+        }
+
+
+
+        private void drawCircleDiagram()
+        {
+            Ellipse e = new Ellipse();
+            e.Height = e.Width = 250;
+            e.Fill = Brushes.Bisque;
+            viewBox1.Children.Add(e);
+            e.RenderTransform = new TranslateTransform(400, 400);
         }
 
         private void draw_Click(object sender, RoutedEventArgs e)
         {
             viewBox.Children.Clear();
-            drawDiagram();      
+            drawDiagram();
+            drawCircleDiagram();
         }
 
         private void del_Click(object sender, RoutedEventArgs e)

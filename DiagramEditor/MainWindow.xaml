@@ -20,6 +20,7 @@
                 <ListBox x:Name="dataList" />
             </DockPanel>
         </GroupBox>
+
         <GroupBox DockPanel.Dock="Bottom" Header="Управление просмотром">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"
                         VerticalAlignment="Center">
@@ -31,10 +32,13 @@
                         Width="200"/>
             </StackPanel>
         </GroupBox>
-        <GroupBox Header="Просмотр">
-            <Canvas x:Name="viewBox" Background="LightBlue">
-                
-            </Canvas>
-        </GroupBox>
+        <TabControl>
+            <TabItem Header="Диаграмма 1">
+                <Canvas x:Name="viewBox" Background="LightBlue"/>
+            </TabItem >
+            <TabItem Header="Диаграмма 2">
+                <Canvas x:Name="viewBox1" Background="LightBlue"/>
+            </TabItem>
+        </TabControl>
     </DockPanel>
 </Window>
